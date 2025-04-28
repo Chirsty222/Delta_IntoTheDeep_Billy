@@ -4,12 +4,9 @@ import android.annotation.SuppressLint;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.common.hardware.BotCoefficients;
 import org.firstinspires.ftc.teamcode.common.hardware.RobotHardware;
-
 //
 @TeleOp(name = "OpMode3")
 
@@ -19,7 +16,6 @@ public class OpMode3 extends LinearOpMode {
     RobotHardware robot = new RobotHardware();
 
     private int sleepMs1 = 0;
-    private boolean bMoveUpSlider = false;
 
     /**
      * This function is executed when this Op Mode is selected from the Driver Station.
@@ -30,9 +26,10 @@ public class OpMode3 extends LinearOpMode {
 
         robot.init(hardwareMap);
 
+//        robot.liftHex.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        robot.liftHex.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        robot.liftHex.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         // Put initialization blocks here.
-        int liftBasePosition0 = robot.liftArm.getCurrentPosition();
-
         waitForStart();
         while (opModeIsActive()) {
             double horizontal = -1.0 * gamepad1.right_stick_x * 0.6;
@@ -52,8 +49,7 @@ public class OpMode3 extends LinearOpMode {
             brPower = brPower / scaling;
             robot.setDrivePower(flPower, frPower, blPower, brPower);
 
-            // robot.setDrivePower(vertical + turn + horizontal, vertical
-            // - turn - horizontal, vertical + turn - horizontal, vertical - turn + horizontal);
+            // robot.setDrivePower(vertical + turn + horizontal, vertical - turn - horizontal, vertical + turn - horizontal, vertical - turn + horizontal);
 
             telemetry.addLine(String.format("FL: %d \nBL %d \nFR: %d \nBR: %d ",
                     robot.motorfl.getCurrentPosition(),
@@ -62,99 +58,80 @@ public class OpMode3 extends LinearOpMode {
                     robot.motorbr.getCurrentPosition()
             ));
 
-
+//test
 //make sure one of the directions is correct/reversed
-            //misumi slide start
-            // To use continuous servo:
-            // 1) change to continuous  rotation servo by using servo programmer
-            // 2) on driver station, configured it as continuous rotation servo
-            // 3) in Java code, use class "CRServo"
-            if (gamepad2.left_stick_y > 0.7) { //if joystick moved up
-                //misumi slide extends
-                robot.misumiSlide.setPower(-1.0);
-            }
-            else if(gamepad2.left_stick_y < -0.7) {// if joystick moves down
-                // misumi slide retract
-                robot.misumiSlide.setPower(1.0);
-            }
-            else { //stop
-                robot.misumiSlide.setPower(0.0);
-            }
 
 
-//linear slide
-            if (gamepad2.right_stick_y < -0.7) { //when sticky y is on, going up
-//                robot.liftArm.setTargetPosition(500);
-//                robot.liftArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                robot.liftArm.setPower(BotCoefficients.SLIDER_UP_POWER);
-                bMoveUpSlider = true;
+            //lift arm start
+/*
+            if (gamepad2.b) { //if button a pressed
+                robot.liftHex.setPower(0.8);
+                //tilt the lift to be upright
+                sleep(1000);
+                robot.liftHex.setPower(0);
             }
-            else if (gamepad2.right_stick_y > 0.7) { //if sticky y is on, go down
-               robot.liftArm.setPower(BotCoefficients.SLIDER_DOWN_POWER);
-               bMoveUpSlider = false;
-            }
-            else {
-                if (bMoveUpSlider) { // if last slider action is going up, hold slider
-                    robot.liftArm.setPower(BotCoefficients.SLIDER_HOLD_POWER);
-                }
-                else { // otherwise, no needs to hold slider power.
-                    robot.liftArm.setPower(0);
-                }
-            }
+           robot.liftHex.setPower(0);
 
-//grabberX on horizontal (misumi slide)
+ */
+
+         /*   while (gamepad2.b) { //if button a pressed
+                // robot.liftHex.setPower(1.0);
+                robot.liftHex.setPower(1.0);
+                //tilt the lift to be upright
+            }
+            robot.liftHex.setPower(0);
+
+
+            while (gamepad2.x) {
+                //robot.liftHex.setPower(-1.0);
+                robot.liftHex.setPower(-1.0);
+            }
+            robot.liftHex.setPower(0);
+
+
+            while (gamepad2.a) { //if button a pressed
+                robot.liftArm.setPower(0.5);
+                //tilt the lift to be upright
+            }
+            robot.liftArm.setPower(0);
+
+
+            while (gamepad2.y) {
+                robot.liftArm.setPower(-0.5);
+            }
+            robot.liftArm.setPower(0);
+
+
+
+            //if(gamepad1.right_trigger > 0.7){
+            //robot.airplaneLauncher.setPosition(1.0);
+
+
+//grabber
             if (gamepad2.left_trigger > 0.5) {
-                robot.grabberX.setPosition(0.4); // open
-            }
-            else if (gamepad2.left_bumper) {
-                robot.grabberX.setPosition(0.65); // close
-            }
-            else {
-              //  robot.grabberX.setPosition(0);
-            }
-
-            if (gamepad2.dpad_up) {
-                robot.grabberXtilt.setPosition(1); // tilt up grabber
-            }
-            else if (gamepad2.dpad_down) {
-                robot.grabberXtilt.setPosition(0.1); // tilt down grabber
-            }
-            else {
-                //  robot.grabberX.setPosition(0);
+                robot.grabServoLeft.setPosition(1.0); // open
+            } else if (gamepad2.left_bumper) {
+                robot.grabServoLeft.setPosition(0.0); // close
             }
 
 
-//grabberY (linearslide)
-            if (gamepad2.right_trigger > 0.5) {
-                robot.grabberY.setPosition(BotCoefficients.grabberYOpen); // open
-           } else if (gamepad2.right_bumper) {
-                robot.grabberY.setPosition(BotCoefficients.grabberYClose); // close
-            } else{
-               // robot.grabberY.setPosition(0.0);
-            }
+//tilt servo
+            if (gamepad2.right_stick_y > 0.7) {
+                robot.tiltServoLeft.setPosition(0.0);
 
-//tilt servo on Y vertical slide
-            if (gamepad2.y) {
-                robot.grabberYtilt.setPosition(BotCoefficients.grabberYtiltUp);    // tilt up
-
-            } else if (gamepad2.a) {
-                robot.grabberYtilt.setPosition(BotCoefficients.grabberYtiltDown);      // tilt down
-                // AND open the grabber
-
-            } else {
-                // robot.grabberYtilt.setPosition(0);
+            } else if (gamepad2.right_stick_y < -0.7) {
+                robot.tiltServoLeft.setPosition(0.8);
             }
 
 //tilt servo #2
-            /*
             if (gamepad2.left_stick_y > 0.7) {
-                robot.grabberYtilt.setPosition(0.0);
+                robot.tiltServoLeft.setPosition(0.0);
 
             } else if (gamepad2.left_stick_y < -0.7) {
-                robot.grabberYtilt.setPosition(0.6);
+                robot.tiltServoLeft.setPosition(0.6);
             }
 
-*/
+
         }
 
 
@@ -205,5 +182,6 @@ public class OpMode3 extends LinearOpMode {
 
       */
 
-        }
+
     }
+}}
