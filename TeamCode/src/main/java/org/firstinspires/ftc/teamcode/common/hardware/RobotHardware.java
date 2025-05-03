@@ -32,14 +32,16 @@ public class RobotHardware {
 
       public DcMotor liftArm = null;
 
-      public DcMotor launcher = null;
+      
 
-    public CRServo misumiSlide = null;
-     public Servo grabberXtilt = null; // tilt servo horizontal
-     public Servo grabberX = null;
+   //   public DcMotor launcher = null;
 
-     public Servo grabberYtilt; //tilt servo vertical (2nd stage)
-     public Servo grabberY = null;
+    //public CRServo misumiSlide = null;
+   //  public Servo grabberXtilt = null; // tilt servo horizontal
+   //  public Servo grabberX = null;
+
+    // public Servo grabberYtilt; //tilt servo vertical (2nd stage)
+  //   public Servo grabberY = null;
 
 
     //public Servo airplaneLauncher = null;
@@ -73,7 +75,7 @@ public class RobotHardware {
 
         liftArm = hwMap.get(DcMotor.class, "liftArm");
         // Horizontal slide
-        misumiSlide = hwMap.get(CRServo.class, "misumiSlide");
+       // misumiSlide = hwMap.get(CRServo.class, "misumiSlide");
 
         grabberYtilt = hwMap.get(Servo.class, "grabberYtilt");
         grabberY = hwMap.get(Servo.class, "grabberY");
@@ -95,7 +97,7 @@ public class RobotHardware {
         liftArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         liftArm.setPower(0);
 
-        misumiSlide.setPower(0);
+  //      misumiSlide.setPower(0);
 
         //motorbr.setDirection(DcMotor.Direction.REVERSE);
 
