@@ -25,6 +25,7 @@ public class OpMode3 extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         robot.init(hardwareMap);
+        boolean intakeToggle = false;
 
 //        robot.liftHex.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 //        robot.liftHex.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -63,66 +64,71 @@ public class OpMode3 extends LinearOpMode {
 
 
             //lift arm start
-/*
-            if (gamepad2.b) { //if button a pressed
-                robot.liftHex.setPower(0.8);
+
+            if (gamepad1.y) { //if button y pressed
+                robot.linearSlide.setPower(-0.8);
+                //tilt the lift to be upright
+                sleep(500);
+            }
+            robot.linearSlide.setPower(-0.1);
+
+            //robot.linearSlide.setPower(0);
+
+
+
+            while (gamepad1.a) { //if button a pressed
+                // robot.liftHex.setPower(1.0);
+                robot.linearSlide.setPower(0.8);
                 //tilt the lift to be upright
                 sleep(1000);
-                robot.liftHex.setPower(0);
+
             }
-           robot.liftHex.setPower(0);
+            robot.linearSlide.setPower(-0.1);
 
- */
 
-         /*   while (gamepad2.b) { //if button a pressed
-                // robot.liftHex.setPower(1.0);
-                robot.liftHex.setPower(1.0);
+
+      //      while (gamepad2.a) { //if button a pressed
+          //      robot.linearSlide.setPower(0.5);
                 //tilt the lift to be upright
-            }
-            robot.liftHex.setPower(0);
+       //     }
+       //     robot.liftArm.setPower(0);
 
 
-            while (gamepad2.x) {
-                //robot.liftHex.setPower(-1.0);
-                robot.liftHex.setPower(-1.0);
-            }
-            robot.liftHex.setPower(0);
-
-
-            while (gamepad2.a) { //if button a pressed
-                robot.liftArm.setPower(0.5);
-                //tilt the lift to be upright
-            }
-            robot.liftArm.setPower(0);
-
-
-            while (gamepad2.y) {
-                robot.liftArm.setPower(-0.5);
-            }
-            robot.liftArm.setPower(0);
+      //      while (gamepad2.y) {
+       //         robot.linearSlide.setPower(1.0);
+        //    }
+      //      robot.linearSlide.setPower(0);
 
 
 
-            //if(gamepad1.right_trigger > 0.7){
-            //robot.airplaneLauncher.setPosition(1.0);
+         //   if(gamepad1.right_trigger > 0.7){
+          //  robot.rotator.setPosition(1.0);
 
 
-//grabber
-            if (gamepad2.left_trigger > 0.5) {
-                robot.grabServoLeft.setPosition(1.0); // open
-            } else if (gamepad2.left_bumper) {
-                robot.grabServoLeft.setPosition(0.0); // close
+
+            if (gamepad1.left_trigger > 0.5) {
+                robot.rotator.setPosition(0.4); // open
+
+            } else if ( gamepad1.left_bumper) {
+                robot.rotator.setPosition(1.0); // close
             }
 
 
 //tilt servo
-            if (gamepad2.right_stick_y > 0.7) {
-                robot.tiltServoLeft.setPosition(0.0);
 
-            } else if (gamepad2.right_stick_y < -0.7) {
-                robot.tiltServoLeft.setPosition(0.8);
+            if (gamepad1.right_bumper ) {
+                robot.intake.setPosition(0.5);
+            } else if (gamepad1.right_trigger > 0.5) {
+                if(intakeToggle){
+                    robot.intake.setPosition(1.0);
+                    intakeToggle = false;
+                }else {
+                    intakeToggle = true;
+                    robot.intake.setPosition(0.0);
+                }
             }
 
+            /*
 //tilt servo #2
             if (gamepad2.left_stick_y > 0.7) {
                 robot.tiltServoLeft.setPosition(0.0);
@@ -163,6 +169,7 @@ public class OpMode3 extends LinearOpMode {
 
 
 
+
     private void TiltLiftOne ( double crankPowerBegin, int crankTimeMs, double crankPowerEnd,
         double liftPowerBegin, int liftTimeMs, double liftPowerEnd){
             //tilt the lift to be upright
@@ -180,7 +187,9 @@ public class OpMode3 extends LinearOpMode {
         }
 
 
-      */
+             */
+
+
 
 
     }

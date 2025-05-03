@@ -30,18 +30,20 @@ public class RobotHardware {
     public DcMotor motorbl = null;
 
 
-      public DcMotor liftArm = null;
+      public DcMotor linearSlide = null;
 
       
 
    //   public DcMotor launcher = null;
 
     //public CRServo misumiSlide = null;
-   //  public Servo grabberXtilt = null; // tilt servo horizontal
-   //  public Servo grabberX = null;
+  //   public Servo grabberXtilt = null; // tilt servo horizontal
+     public Servo intake = null;
+    public Servo rotator = null;
 
-    // public Servo grabberYtilt; //tilt servo vertical (2nd stage)
-  //   public Servo grabberY = null;
+
+    //  public Servo grabberYtilt; //tilt servo vertical (2nd stage)
+ //    public Servo grabberY = null;
 
 
     //public Servo airplaneLauncher = null;
@@ -73,14 +75,15 @@ public class RobotHardware {
         motorbr = hwMap.get(DcMotor.class, "motorbr");
         //launcher = hwMap.get(DcMotor.class, "launcher");
 
-        liftArm = hwMap.get(DcMotor.class, "liftArm");
+        linearSlide = hwMap.get(DcMotor.class, "linearSlide");
         // Horizontal slide
        // misumiSlide = hwMap.get(CRServo.class, "misumiSlide");
 
-        grabberYtilt = hwMap.get(Servo.class, "grabberYtilt");
-        grabberY = hwMap.get(Servo.class, "grabberY");
-        grabberXtilt = hwMap.get(Servo.class, "grabberXtilt");
-        grabberX = hwMap.get(Servo.class, "grabberX");
+        //grabberYtilt = hwMap.get(Servo.class, "grabberYtilt");
+      //  grabberY = hwMap.get(Servo.class, "grabberY");
+        rotator = hwMap.get(Servo.class, "rotator");
+        intake = hwMap.get(Servo.class, "intake");
+       // intake.setPosition(0.5);
 
         // set Brake zero power behavior
         motorfr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -94,8 +97,8 @@ public class RobotHardware {
         // LiftArm motor reset
 //        liftArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 //        liftArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        liftArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        liftArm.setPower(0);
+        linearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        linearSlide.setPower(0);
 
   //      misumiSlide.setPower(0);
 
