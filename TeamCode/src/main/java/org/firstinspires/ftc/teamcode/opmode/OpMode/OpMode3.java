@@ -68,7 +68,7 @@ public class OpMode3 extends LinearOpMode {
             if (gamepad1.y) { //if button y pressed
                 robot.linearSlide.setPower(-0.8);
                 //tilt the lift to be upright
-                sleep(500);
+                sleep(200);
             }
             robot.linearSlide.setPower(-0.1);
 
@@ -107,16 +107,16 @@ public class OpMode3 extends LinearOpMode {
 
 
             if (gamepad1.left_trigger > 0.5) {
-                robot.rotator.setPosition(0.4); // open
+                robot.rotator.setPosition(0.44); //up
 
             } else if ( gamepad1.left_bumper) {
-                robot.rotator.setPosition(1.0); // close
+                robot.rotator.setPosition(1.0); //down
             }
 
 
 //tilt servo
 
-            if (gamepad1.right_bumper ) {
+            if (gamepad1.right_bumper) {
                 robot.intake.setPosition(0.5);
             } else if (gamepad1.right_trigger > 0.5) {
                 if(intakeToggle){
