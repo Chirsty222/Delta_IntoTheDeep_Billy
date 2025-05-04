@@ -128,6 +128,12 @@ public class OpMode3 extends LinearOpMode {
                 }
             }
 
+            if(gamepad1.dpad_up){
+                robot.intake.setPosition(1.0);
+            }else if (gamepad1.dpad_down){
+                robot.intake.setPosition(0.0);
+            }
+
             /*
 //tilt servo #2
             if (gamepad2.left_stick_y > 0.7) {
