@@ -106,10 +106,10 @@ public class OpMode3 extends LinearOpMode {
 
 
 
-            if (gamepad1.left_trigger > 0.5 || gamepad1.dpad_left || gamepad1.x) {
+            if (gamepad1.left_trigger > 0.5 || gamepad1.dpad_left) {
                 robot.rotator.setPosition(0.44); //up
 
-            } else if ( gamepad1.left_bumper || gamepad1.dpad_right || gamepad1.b) {
+            } else if ( gamepad1.left_bumper || gamepad1.dpad_right) {
                 robot.rotator.setPosition(1.0); //down
             }
 
@@ -135,7 +135,12 @@ public class OpMode3 extends LinearOpMode {
             }else if (gamepad1.dpad_down || gamepad1.right_trigger > 0.5){
                 robot.intake.setPosition(0.0);
             }
-
+            if((gamepad1.dpad_up || gamepad1.right_bumper) && robot.intake.getPosition() == 1){
+                robot.intake.setPosition(0.5);
+            }
+            if((gamepad1.dpad_down || gamepad1.right_trigger > 0.5) && robot.intake.getPosition() == 0){
+                robot.intake.setPosition(0.5);
+            }
             /*
 //tilt servo #2
             if (gamepad2.left_stick_y > 0.7) {
