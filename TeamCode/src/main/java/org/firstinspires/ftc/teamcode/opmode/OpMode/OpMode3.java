@@ -136,8 +136,9 @@ public class OpMode3 extends LinearOpMode {
                 robot.intake.setPosition(0.0);
             } else {
                 robot.intake.setPosition(0.5);
+                robot.intake.setPosition(gamepad1.left_stick_y*0.5+0.5);
             }
-            robot.intake.setPosition(gamepad1.left_stick_y*0.5+0.5);
+            //robot.intake.setPosition(gamepad1.left_stick_y*0.5+0.5);
             /*
             if((gamepad1.dpad_up || gamepad1.right_bumper) && robot.intake.getPosition() == 1){
                 robot.intake.setPosition(0.5);
