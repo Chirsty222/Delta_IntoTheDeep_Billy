@@ -115,7 +115,7 @@ public class OpMode3 extends LinearOpMode {
 
 
 //tilt servo
-
+            /*
             if (gamepad1.right_bumper) {
                 robot.intake.setPosition(0.5);
             } else if (gamepad1.right_trigger > 0.5) {
@@ -128,9 +128,11 @@ public class OpMode3 extends LinearOpMode {
                 }
             }
 
-            if(gamepad1.dpad_up){
+             */
+
+            if(gamepad1.dpad_up || gamepad1.right_bumper){
                 robot.intake.setPosition(1.0);
-            }else if (gamepad1.dpad_down){
+            }else if (gamepad1.dpad_down || gamepad1.right_trigger > 0.5){
                 robot.intake.setPosition(0.0);
             }
 
