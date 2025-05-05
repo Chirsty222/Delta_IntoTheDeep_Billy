@@ -106,10 +106,10 @@ public class OpMode3 extends LinearOpMode {
 
 
 
-            if (gamepad1.left_trigger > 0.5) {
+            if (gamepad1.left_trigger > 0.5 || gamepad1.dpad_left || gamepad1.x) {
                 robot.rotator.setPosition(0.44); //up
 
-            } else if ( gamepad1.left_bumper) {
+            } else if ( gamepad1.left_bumper || gamepad1.dpad_right || gamepad1.b) {
                 robot.rotator.setPosition(1.0); //down
             }
 
